@@ -30,10 +30,10 @@ struct GridPosition {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    // Grid constants
-    private let gridWidth = 13
-    private let gridHeight = 11
-    private let tileSize: CGFloat = 40
+    // Grid constants - horizontal layout (wider than tall)
+    private let gridWidth = 17
+    private let gridHeight = 9
+    private let tileSize: CGFloat = 32
     
     // Game objects
     private var player: SKSpriteNode?
@@ -159,8 +159,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func setupEnemies() {
-        // Add a few Ballom enemies
-        let enemyPositions = [(11, 9), (9, 1), (3, 9)]
+        // Add a few Ballom enemies - adjusted for horizontal layout
+        let enemyPositions = [(15, 7), (13, 1), (3, 7), (9, 3)]
         
         for (x, y) in enemyPositions {
             if gameGrid[y][x] == 0 {
@@ -193,39 +193,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func setupUI() {
-        // Score label
+        // Score label - positioned for horizontal layout
         scoreLabel = SKLabelNode(text: "Score: 0")
-        scoreLabel?.fontSize = 24
+        scoreLabel?.fontSize = 20
         scoreLabel?.fontName = "Arial-BoldMT"
-        scoreLabel?.position = CGPoint(x: -size.width/2 + 100, y: size.height/2 - 50)
+        scoreLabel?.position = CGPoint(x: -size.width/2 + 80, y: size.height/2 - 30)
         addChild(scoreLabel!)
         
         // Control pad (virtual D-pad)
         setupControlPad()
         
-        // Bomb button
+        // Bomb button - repositioned for horizontal layout
         bombButton = SKLabelNode(text: "💣")
-        bombButton?.fontSize = 40
+        bombButton?.fontSize = 35
         bombButton?.name = "bombButton"
-        bombButton?.position = CGPoint(x: size.width/2 - 60, y: -size.height/2 + 80)
+        bombButton?.position = CGPoint(x: size.width/2 - 50, y: -size.height/2 + 60)
         addChild(bombButton!)
     }
     
     private func setupControlPad() {
         controlPad = SKNode()
         controlPad?.name = "controlPad"
-        controlPad?.position = CGPoint(x: -size.width/2 + 100, y: -size.height/2 + 100)
+        controlPad?.position = CGPoint(x: -size.width/2 + 80, y: -size.height/2 + 80)
         
         let directions = [
-            ("↑", CGPoint(x: 0, y: 40), "up"),
-            ("↓", CGPoint(x: 0, y: -40), "down"),
-            ("←", CGPoint(x: -40, y: 0), "left"),
-            ("→", CGPoint(x: 40, y: 0), "right")
+            ("↑", CGPoint(x: 0, y: 35), "up"),
+            ("↓", CGPoint(x: 0, y: -35), "down"),
+            ("←", CGPoint(x: -35, y: 0), "left"),
+            ("→", CGPoint(x: 35, y: 0), "right")
         ]
         
         for (symbol, offset, name) in directions {
             let button = SKLabelNode(text: symbol)
-            button.fontSize = 30
+            button.fontSize = 25
             button.name = name
             button.position = offset
             controlPad?.addChild(button)
