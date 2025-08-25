@@ -55,6 +55,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var explosionRadius = 1
     
     override func didMove(to view: SKView) {
+        // Set anchor point to center the scene properly
+        anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
         setupPhysics()
         setupGrid()
         setupPlayer()
